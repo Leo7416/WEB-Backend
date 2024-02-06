@@ -468,6 +468,27 @@ def put_status_moderator_application(request, water_meter_reading_id, format=Non
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
 
+
+@swagger_auto_schema(method='put', request_body=WaterMeterReadingSerializer)
+@permission_classes([AllowAny])
+@api_view(['PUT'])
+def put_async_application(request, format=None):
+    """
+    Обновление поля асинхронным сервером
+    """ 
+    const_token = 'access_token'
+    if const_token != request.data.get('token'):
+        return Response({'message': 'Ошибка, токен не соответствует'}, status=status.HTTP_403_FORBIDDEN)
+    
+    meter_id = request.data.get('meter_id')
+    address_id = request.data.get('address_id')
+    manytomany = Manytomany.objects.get(meter_id=meter_id, address_id=address_id)
+    manytomany.price = request.data.get('price')
+    manytomany.save()
+
+    serializer = ManyToManySerializer(manytomany)
+    return Response(serializer.data)
+
 @api_view(['DELETE'])
 def delete_address_from_applications(request, address_id, format=None):  
     """
