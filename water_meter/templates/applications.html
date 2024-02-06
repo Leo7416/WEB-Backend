@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+<ul class="ul"></ul>
+<div class="lower">
+    <h2>Поиск по адресам</h2>
+    <form action="/query" method="get">
+        {% csrf_token %}
+        <label>Название улицы:</label>
+        <input name="query" type="text" placeholder="Введите что-нибудь" />
+        <button type="submit" value="Фильтровать по улицам">Найти</button>
+    </form>
+</div>
+<div class="oval">
+    <p class="text_oval">Показание счетчиков воды</p>
+</div>
+<ul>
+    {% for application in data %}
+
+    <body>
+        <div class="card">
+            <div class="cut">
+                <div class="card-header" style="background-image: url({{application.images.url}})"> </div>
+            </div>
+            <p class="info"> Город: {{ application.town }}
+            <p class="card-text"> Адрес: {{ application.address }} </p>
+            <p class="card-text-1"> Квартира: {{ application.apartment }} </p>
+            </p>
+            <div class="button"><a href="/application/{{application.address_id}}">Подробнее</a></div>
+            <div class="button-2"><a href="/logical_delete/{{application.address_id}}">Удалить</a></div>
+        </div>
+    </body>
+    {% endfor %}
+</ul>
+{% endblock %}

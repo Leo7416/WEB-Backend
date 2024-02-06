@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<body>
+    <ul class="ul">
+        <div class="oval-application">
+            <p class="text-oval-application"> Способы узнать показаний счетчиков: </p>
+            <div class="box"> портал услуг Москвы - mos.ru </div>
+            <div class="box-2"> портал «Госуслуг» - gosuslugi.ru </div>
+            <div class="box-3"> сайт «Мосводоканала» - mosvodokanal.ru </div>
+        </div>
+        <div class="card_images_order"><img src="{{ application.images.url }}" alt="Error" width="280" height="250" />
+        </div>
+
+        <div class="order-text"> 
+            Показания счетчика для <lower> {{ application.address }}, кв. {{ application.apartment }} </lower> 
+        </div>
+        <div class="water-meter-frame"> {{ application.meter_reading }} </div>
+        <p style="font-size: 30px;"> 
+            Показаний считаются по последним трем цифрам </p>
+    </ul>
+</body>
+{% endblock %}

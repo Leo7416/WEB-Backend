@@ -23,12 +23,12 @@
   background-position: top;
 }
 
-.card-header:after{
-  content:'';
+.card-header:after {
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(255, 252, 101, 0.5), rgba(181,181,181, 0.1));
+  background: linear-gradient(to top, rgba(255, 252, 101, 0.5), rgba(181, 181, 181, 0.1));
 }
 
 .card:hover {
@@ -40,7 +40,7 @@
   width: 100%;
   top: 50%;
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
   font-family: Tahoma;
 }
 
@@ -68,6 +68,23 @@
   font-weight: 100;
   cursor: pointer;
   margin-left: 15px;
+  margin-top: 35%;
+}
+
+.button-2 {
+  display: inline-block;
+  background: #0dfa40;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: Tahoma;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 100;
+  cursor: pointer;
+  margin-left: 85px;
   margin-top: 35%;
 }
 
@@ -126,7 +143,7 @@ button {
   text-align: center;
   font-size: 40px;
   color: white;
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .cut {
@@ -137,4 +154,108 @@ button {
 
 a {
   text-decoration: none;
+  color:#1a1919;
+}
+
+.card-text {
+  position: absolute;
+  width: 100%;
+  top: 60%;
+  text-align: center;
+  font-size: 20px;
+  font-family: Tahoma;
+}
+
+.card-text-1 {
+  position: absolute;
+  width: 100%;
+  top: 65%;
+  text-align: center;
+  font-size: 20px;
+  font-family: Tahoma;
+}
+
+.text-order,
+lower {
+  border-bottom: 2px solid #1a1919;
+}
+
+.oval-application {
+  height: 930px;
+  width: 330px;
+  background: rgb(3, 192, 3);
+  position: absolute;
+  bottom: 10px;
+  right: 8px;
+  background-image: url("/water_meter/static/images/12.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  border-bottom-left-radius: 50px 100px;
+}
+
+.text-oval-application {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 32px;
+  color: white;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.box {
+  width: 313px;
+  height: 60px;
+  background-color: #66E066;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  position: absolute;
+  top: 14%;
+  left: 5%;
+  text-align: center;
+  font-size: 26px;
+  color: rgb(68, 66, 66);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.box-2 {
+  width: 313px;
+  height: 60px;
+  background-color: rgb(86, 245, 86);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  position: absolute;
+  top: 24%;
+  left: 5%;
+  text-align: center;
+  font-size: 26px;
+  color: rgb(68, 66, 66);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.box-3 {
+  width: 313px;
+  height: 60px;
+  background-color: #66E066;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  position: absolute;
+  top: 34%;
+  left: 5%;
+  text-align: center;
+  font-size: 26px;
+  color: rgb(68, 66, 66);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.water-meter-frame {
+  margin-top: 1%;
+  width: 100px;
+  border: 2px solid #3498db; /* Ширина, стиль и цвет рамки */
+  padding: 10px; /* Отступы внутри рамки */
+  border-radius: 10px; /* Скругленные углы */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Тень */
+  background-color: #f2f2f2; /* Фоновый цвет рамки */
+  color: #333; /* Цвет текста внутри рамки */
+  font-size: 30px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

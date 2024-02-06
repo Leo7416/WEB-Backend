@@ -1,30 +1,44 @@
-from datetime import date
+from django.db.models import Q
 from django.shortcuts import render
+from water_meter.models import Addresses
+from water_meter.models import WaterMeterReading
+from django.db import connection
 
-data = [
-            {'title': 'г.Москва, ул.Большевиков 16, частный дом', 'id': 1, 'image': 'images/1.jpg', 'text': '02234678'},
-            {'title': 'г.Москва, ул.Карла Либкнехта 2, частный дом', 'id': 2, 'image': 'images/2.jpg', 'text': '06454798'},
-            {'title': 'г.Липецк, ул.Кузьминская 11, частный дом', 'id': 3, 'image': 'images/3.jpg', 'text': '04281579'},
-        ]
 
-def GetOrders(request):
-    return render(request, 'orders.html', {'data': data})
+def GetApplications(request):
+    data = Addresses.objects.filter(address_status='Действует')
+    return render(request, 'applications.html', {'data': data})
 
-def GetOrder(request, id):
-    for my_dict in data:
-        if my_dict['id'] == id:
-            print(my_dict['title'])
-            return render(request, 'order.html', {'order': my_dict})
+def GetApplication(request, address_id):
+    address = Addresses.objects.get(address_id=address_id)
+    meter_reading = address.meter_reading
+    
+    return render(request, 'application.html', {'application': address, 'meter_reading': meter_reading})
+
         
 def GetQuery(request):
     query = request.GET.get('query', '')
-    new_street = []
-    for order in data:
-        if query.lower() in order["title"].lower():
-            new_street.append(order)
 
-    if len  (new_street)>0:
-        return render(request, 'orders.html',{'data': new_street})
+    if query.isnumeric():
+        filtered_addresses = Addresses.objects.filter(apartment=query)
     else:
-        return render(request, 'orders.html', {'data': data})
+        # Если query не является числом, выполняем фильтрацию по полям town и address
+        filtered_addresses = Addresses.objects.filter(
+            Q(town=query) |
+            Q(address=query)
+        )
+    return render(request, 'applications.html', {'data': filtered_addresses})
 
+def GetMeterReading(request,meter_reading):
+    return render(request, 'application.html', {'reading': WaterMeterReading.objects.get(meter_reading=meter_reading)})
+
+def Logical_delete_address(request, address_id):
+    data = Addresses.objects.filter(address_status='Действует')
+    # SQL-запрос для изменения статуса записи
+    sql = "UPDATE addresses SET address_status = 'Удален' WHERE address_id = %s;"
+    
+    # Выполняем SQL-запрос
+    with connection.cursor() as cursor:
+        cursor.execute(sql, [address_id])
+    
+    return render(request, 'applications.html', {'data': data})  
