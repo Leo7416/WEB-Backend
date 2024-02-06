@@ -3,12 +3,12 @@ from django.db import models
 
 class Addresses(models.Model):
     address_id = models.AutoField(primary_key=True)
-    town = models.CharField(max_length=50)
+    town = models.CharField(max_length=60)
     address = models.CharField(max_length=50)
     apartment = models.IntegerField()
     house_type = models.CharField(max_length=12)
     meter_reading = models.IntegerField()
-    images = models.ImageField()
+    images = models.BinaryField()
     address_status = models.CharField(max_length=12)
     user = models.ForeignKey('Users', models.DO_NOTHING, blank=True, null=True)
 
