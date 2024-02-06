@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+<ul class="ul"></ul>
+<div class="lower">
+    <h2>Поиск по адресам</h2>
+    <form action="/query" method="get">
+        {% csrf_token %}
+        <label>Название улицы:</label>
+        <input name="query" type="text" placeholder="Введите что-нибудь" />
+        <button type="submit" value="Фильтровать по улицам">Найти</button>
+    </form>
+</div>
+<div class="oval">
+    <p class="text_oval">Показание счетчиков воды</p>
+</div>
+<ul>
+    {% for order in data %}
+
+    <body>
+        <div class="card">
+            <div class="cut">
+                <div class="card-header" style="background-image: url(/water_meter/static/images/{{order.id}}.jpg)">
+                </div>
+            </div>
+            <p class="info"> {{ order.title }} </p>
+            <div class="button"><a href="{% url 'order_url' order.id %}">Подробнее</a></div>
+        </div>
+    </body>
+    {% endfor %}
+</ul>
+{% endblock %}

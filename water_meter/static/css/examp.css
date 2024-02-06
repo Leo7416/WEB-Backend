@@ -1,0 +1,140 @@
+.order-text {
+  font-size: 30px;
+}
+
+.card {
+  width: 315px;
+  min-height: 450px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0, 0.5);
+  transition: 0.2s;
+  position: relative;
+  margin: 25px;
+  max-width: 60%;
+  margin-top: 5%;
+}
+
+.card-header {
+  position: relative;
+  height: 220px;
+  background-size: cover;
+  background-position: top;
+}
+
+.card-header:after{
+  content:'';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(255, 252, 101, 0.5), rgba(181,181,181, 0.1));
+}
+
+.card:hover {
+  box-shadow: 4px 8px 16px #f8fa9f;
+}
+
+.info {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  text-align: center;
+  font-size: 20px;
+  font-family: Tahoma;
+}
+
+.card_images_order {
+  display: inline-block;
+  margin-top: 60px;
+}
+
+.card_images {
+  display: grid;
+  justify-content: top left;
+}
+
+.button {
+  display: inline-block;
+  background: #0dfa40;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: Tahoma;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 100;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-top: 35%;
+}
+
+h2 {
+  font-family: Tahoma;
+  margin: 0;
+}
+
+input,
+button {
+  font-size: 16px;
+  padding: 4px 8px;
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  margin-top: 12px;
+}
+
+.lower {
+  padding: 12px 0;
+  border-bottom: 1px solid #1a1919;
+  display: inline-block;
+}
+
+.ul {
+  list-style: none;
+  /*убираем маркеры списка*/
+  margin: 0;
+  /*убираем отступы*/
+  padding-left: 0;
+  /*убираем отступы*/
+  margin-top: 10px;
+  /*делаем отступ сверху*/
+  background: rgb(3, 192, 3);
+  /*добавляем фон всему меню (заменив этот параметр, вы поменяете цвет всего меню)*/
+  height: 50px;
+  /*задаем высоту*/
+}
+
+.oval {
+  height: 450px;
+  width: 400px;
+  border-bottom-left-radius: 50px 100px;
+  background: rgb(3, 192, 3);
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  background-image: url("/water_meter/static/images/12.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.text_oval {
+  position: absolute;
+  width: 100%;
+  top: 1%;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.cut {
+  width: 315px;
+  height: 270px;
+  clip-path: polygon(0 0, 0 220px, 0px 220px, 800px 0);
+}
+
+a {
+  text-decoration: none;
+}

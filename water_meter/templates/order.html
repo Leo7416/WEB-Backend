@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<body>
+    <ul class="ul">
+        <div class="card_images_order"><img src="{% static order.image %}" alt="Error" width="280" height="250" /></div>
+        <div class="order-text">Показание счетчика:</div>
+        <p text="{% static order.text %}"></p>
+    </ul>
+</body>
+{% endblock %}

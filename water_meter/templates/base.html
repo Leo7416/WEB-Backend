@@ -1,0 +1,15 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+<link rel="stylesheet" type="text/css" href="{% static 'css/examp.css' %}">
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+  {% block content %}{% endblock %}
+</body>
+
+</html>
