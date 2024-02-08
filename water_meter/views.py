@@ -115,7 +115,7 @@ def get_image_address(request, address_id, format=None):
     return Response({ 'error': 'Поле "image" отсутствует в запросе' })
 
 @api_view(['PUT'])
-def update_image_address(request, address_id, format=None):
+def add_image_address(request, address_id, format=None):
     """
     Добавляет изображение в услугу
     """
