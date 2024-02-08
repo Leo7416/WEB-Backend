@@ -31,7 +31,7 @@ urlpatterns = [
    path('', include(router.urls)),
    path('search/', views.get_search_addresses, name='addresses-search-list'),
 
-   path('address/<int:address_id>/images/update', views.update_image_address, name='update-image-address'),
+   path('address/<int:address_id>/images/add', views.add_image_address, name='update-image-address'),
    path('address/<int:address_id>/images/get', views.get_image_address, name='get-image-address'),
    path('addresses/', views.get_list_addresses, name='addresses-list'),
    path('addresses/post/', views.post_list_address, name='address-post'),
@@ -41,6 +41,7 @@ urlpatterns = [
    path('applications/', views.get_list_applications, name='applications-list'),
    path('application/user/', views.get_list_user_application, name='application-user'),
    path('application/<int:water_meter_reading_id>/', views.detail_application, name='application-detail'),
+   path('application/<int:id>/delete/', views.delete_application, name='application-delete'),
    path('application/<int:water_meter_reading_id>/user/put/', views.put_status_user_application, name='applications-user-put'),
    path('application/<int:water_meter_reading_id>/moderator/put/', views.put_status_moderator_application, name='applications-moderator-put'),
  
