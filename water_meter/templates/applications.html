@@ -29,8 +29,14 @@
             <p class="card-text"> Адрес: {{ application.address }} </p>
             <p class="card-text-1"> Квартира: {{ application.apartment }} </p>
             </p>
-            <div class="button"><a href="/application/{{application.address_id}}">Подробнее</a></div>
-            <div class="button-2"><a href="/logical_delete/{{application.address_id}}">Удалить</a></div>
+            <div class="button-container">
+                <button class="button"><a href="/application/{{application.address_id}}">Подробнее</a></button>
+                <form action="{% url 'add' application.address_id %}" method="post">
+                    {% csrf_token %}
+                    <button class="button-3" type="submit">Добавить</button>
+                </form>
+                <button class="button-2"><a href="/logical_delete/{{application.address_id}}">Удалить</a></button>
+            </div>
         </div>
     </body>
     {% endfor %}

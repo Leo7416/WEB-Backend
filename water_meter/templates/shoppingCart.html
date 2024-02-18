@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Корзина {% endblock %}
+
+{% block content %}
+<ul class="ul"></ul>
+<div class="oval">
+    <p class="text_oval">Показание счетчиков воды</p>
+</div>
+<p class="inf"> Количество записей в корзине: {{ cart_count }} </p>
+<div class="card-container"> <!-- Новый контейнер для карточек -->
+    {% for application in data %}
+    <div class="card">
+        <div class="cut">
+            <div class="card-header" style="background-image: url({{application.images.url}})"> </div>
+        </div>
+        <p class="info"> Город: {{ application.town }}
+        <p class="card-text"> Адрес: {{ application.address }} </p>
+        <p class="card-text-1"> Квартира: {{ application.apartment }} </p>
+        </p>
+        <div class="button-container">
+            <button class="button"><a href="/application/{{application.address_id}}">Подробнее</a></button>
+            <button class="button-2"><a href="/logical_delete/{{application.address_id}}">Удалить</a></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
