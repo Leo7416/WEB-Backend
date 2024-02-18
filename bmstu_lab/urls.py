@@ -39,9 +39,10 @@ urlpatterns = [
    path('address/<int:address_id>/update/', views.update_address, name='address-update'),
  
    path('applications/', views.get_list_applications, name='applications-list'),
-   path('application/user/', views.get_list_user_application, name='application-user'),
-   path('application/<int:water_meter_reading_id>/', views.detail_application, name='application-detail'),
-   path('application/<int:id>/delete/', views.delete_application, name='application-delete'),
+   path('application/<int:water_meter_reading_id>/', views.get_list_user_application, name='application'),
+   path('application/user/', views.get_list_application, name='application-get-id'),
+   path('application/<int:water_meter_reading_id>/delete/', views.delete_application, name='application-delete'),
+   path('application/<int:water_meter_reading_id>/user/', views.detail_application, name='application-detail'),
    path('application/<int:water_meter_reading_id>/user/put/', views.put_status_user_application, name='applications-user-put'),
    path('application/<int:water_meter_reading_id>/moderator/put/', views.put_status_moderator_application, name='applications-moderator-put'),
  

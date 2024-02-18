@@ -270,7 +270,7 @@ def update_address(request, address_id, format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
-def get_list_user_application(request, format=None):
+def get_list_user_application(request, water_meter_reading_id, format=None):  # Обновляем функцию представления, чтобы принимать параметр water_meter_reading_id
     """
     Возвращает список черновой заявки пользователя
     """
@@ -280,13 +280,14 @@ def get_list_user_application(request, format=None):
         user_id = session_storage.get(ssid)
         
         if user_id is not None:
+            applications = WaterMeterReading.objects.filter(Q(id_user=user_id) & Q(meter_status='Черновик'))
             
-            user = CustomUser.objects.get(id=user_id)
-            if WaterMeterReading.objects.filter(id_user=user_id).exists():
-                applications = WaterMeterReading.objects.filter(Q(id_user=user_id) & Q(meter_status='Черновик'))
-                manytomanys = Manytomany.objects.filter(meter_id__in=applications.values('water_meter_reading_id'))
-                data = [
-                    {
+            # Теперь фильтруем заявки по water_meter_reading_id, который передается через URL
+            applications = applications.filter(water_meter_reading_id=water_meter_reading_id)
+            
+            manytomanys = Manytomany.objects.filter(meter_id__in=applications.values('water_meter_reading_id'))
+            data = [
+                {
                     'address_id': manytomany.address_id.address_id,
                     'town': manytomany.address_id.town,
                     'address': manytomany.address_id.address,
@@ -296,8 +297,34 @@ def get_list_user_application(request, format=None):
                     'address_status': manytomany.address_id.address_status,
                     'meter_id': manytomany.meter_id.water_meter_reading_id
                 }
-                    for manytomany in manytomanys
-                ]
+                for manytomany in manytomanys
+            ]
+            return Response(data)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+    
+@api_view(['GET'])
+def get_list_application(request, format=None):
+    """
+    Возвращает список черновой заявки пользователя
+    """
+    ssid = request.COOKIES.get("session_id")
+
+    if ssid is not None:
+        user_id = session_storage.get(ssid)
+        
+        if user_id is not None:
+            user = CustomUser.objects.get(id=user_id)
+            
+            if WaterMeterReading.objects.filter(id_user=user_id).exists():
+                applications = WaterMeterReading.objects.filter(Q(id_user=user_id) & Q(meter_status='Черновик'))
+                manytomanys = Manytomany.objects.filter(meter_id__in=applications.values('water_meter_reading_id'))
+                
+                # Извлекаем только water_meter_reading_id из manytomanys
+                data = [manytomany.meter_id.water_meter_reading_id for manytomany in manytomanys]
+                
                 return Response(data)
             
         else:
@@ -387,7 +414,7 @@ def delete_application(request, water_meter_reading_id, format=None):
 
         if user_id is not None:
 
-            applications = WaterMeterReading.objects.filter(Q(id_user=user_id) & Q(status='Черновик'))
+            applications = WaterMeterReading.objects.filter(Q(id_user=user_id) & Q(meter_status='Черновик'))
             application = get_object_or_404(applications, water_meter_reading_id=water_meter_reading_id)
             application.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -488,6 +515,7 @@ def put_async_application(request, format=None):
 
     serializer = ManyToManySerializer(manytomany)
     return Response(serializer.data)
+
 
 @api_view(['DELETE'])
 def delete_address_from_applications(request, address_id, format=None):  
